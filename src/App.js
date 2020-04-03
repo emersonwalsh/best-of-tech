@@ -13,6 +13,7 @@ function App() {
   }
 
   const handleSignOut = () => {
+    console.log('Sign out');
     localStorage.setItem('userAuth', false);
     setUserAuth(false);
   }
