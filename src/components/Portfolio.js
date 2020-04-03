@@ -70,10 +70,10 @@ export default function Portfolio(props) {
           <TableRow>
             <TableCell align="left">Company</TableCell>
             <TableCell align="left">Ticker</TableCell>
-            <TableCell align="center">% Portfolio (Movement)</TableCell>
-            <TableCell align="center">% Day</TableCell>
-            <TableCell align="center">% Month</TableCell>
-            <TableCell align="center">% Year</TableCell>
+            <TableCell align="right">% Portfolio (Movement)</TableCell>
+            <TableCell align="right">% Day</TableCell>
+            <TableCell align="right">% Month</TableCell>
+            <TableCell align="right">% Year</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -81,10 +81,10 @@ export default function Portfolio(props) {
             <TableRow key={row.id}>
               <TableCell align="left">{row.name}</TableCell>
               <TableCell align="left">{row.ticker}</TableCell>
-              <TableCell align="center">{row.portfolioPercentage + ' (' + row.movement + ')'}</TableCell>
-              <TableCell align="center">{row.dailyChange}</TableCell>
-              <TableCell align="center">{row.monthlyChange}</TableCell>
-              <TableCell align="center">{row.yearlyChange}</TableCell>
+              <TableCell align="right">{row.portfolioPercentage + ' (' + row.movement + ')'}</TableCell>
+              <TableCell align="right">{row.dailyChange}</TableCell>
+              <TableCell align="right">{row.monthlyChange}</TableCell>
+              <TableCell align="right">{row.yearlyChange}</TableCell>
             </TableRow>
           ))}
         </TableBody>
