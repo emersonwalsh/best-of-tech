@@ -140,7 +140,7 @@ export default function Dashboard(props) {
 
   useEffect(() => {
     Tabletop.init( {
-      key: '1VTHT7XYYujSl2J1SFk_OAUThNYS5Q9apdfhe8NX_TPA',
+      key: process.env.REACT_APP_GOOGLE_SHEETS_API_KEY,
       simpleSheet: false }
     ).then(function(data, tabletop) { 
       console.log('Data succesfully fetched from Google Sheets!')
