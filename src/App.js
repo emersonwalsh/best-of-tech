@@ -4,12 +4,6 @@ import './App.css';
 import Dashboard from './components/Dashboard';
 import SignInSide from './components/SignInSide';
 
-
-
-// todo get environment variables from .env for key info (use dotenv npm package?)
-const keyName = process.env.REACT_APP_GOOGLE_SHEETS_API_KEY || 'no env';
-console.log(keyName)
-
 function App() {
   const [userAuth, setUserAuth] = React.useState(false);
 

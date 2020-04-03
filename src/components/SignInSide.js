@@ -66,12 +66,12 @@ export default function SignInSide(props) {
   const [password, setPassword] = React.useState('');
 
   const handleSignIn = () => {
-    console.log('env:', process.env.REACT_APP_USERNAME, process.env.REACT_APP_PASSWORD)
     if (email === process.env.REACT_APP_USERNAME && password === process.env.REACT_APP_PASSWORD) {
       console.log('Successful Login')
       props.onSignIn();
+    } else {
+      console.error('Failed Login')
     }
-    console.error('Failed Login')
   }
 
   const handleEmailChange = event => {
