@@ -57,6 +57,12 @@ const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
+  negative: {
+    color: 'red',
+  },
+  positive: {
+    color: 'green'
+  }
 }));
 
 export default function Portfolio(props) {  
@@ -64,7 +70,7 @@ export default function Portfolio(props) {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Holdings</Title>
+      <Title>Portfolio</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -82,9 +88,9 @@ export default function Portfolio(props) {
               <TableCell align="left">{row.name}</TableCell>
               <TableCell align="left">{row.ticker}</TableCell>
               <TableCell align="right">{row.portfolioPercentage + ' (' + row.movement + ')'}</TableCell>
-              <TableCell align="right">{row.dailyChange}</TableCell>
-              <TableCell align="right">{row.monthlyChange}</TableCell>
-              <TableCell align="right">{row.yearlyChange}</TableCell>
+              <TableCell align="right" className={row.dailyChange.indexOf('-') > -1 ? classes.negative : classes.positive}>{row.dailyChange}</TableCell>
+              <TableCell align="right" className={row.monthlyChange.indexOf('-') > -1 ? classes.negative : classes.positive}>{row.monthlyChange}</TableCell>
+              <TableCell align="right" className={row.yearlyChange.indexOf('-') > -1 ? classes.negative : classes.positive}>{row.yearlyChange}</TableCell>
             </TableRow>
           ))}
         </TableBody>
