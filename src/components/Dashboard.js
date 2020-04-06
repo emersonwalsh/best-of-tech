@@ -22,6 +22,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MainListItems from './listItems';
+import Market from './Market';
 import Chart from './Chart';
 import Summary from './Summary';
 import Portfolio from './Portfolio';
@@ -115,8 +116,14 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     flexDirection: 'column',
   },
+  market: {
+    padding: theme.spacing(1),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
   fixedHeight: {
-    height: 240,
+    height: 260,
   },
 }));
 
@@ -126,7 +133,7 @@ export default function Dashboard(props) {
   const [companies, setCompanies] = React.useState([]);
   const [portfolioHistory, setPortfolioHistory] = React.useState([]);
   const [yearToDatePerformance, setYearToDatePerformance] = React.useState('');
-
+  const [market, setMarket] = React.useState([]);
 
   const [open, setOpen] = React.useState(false);
 
@@ -143,9 +150,12 @@ export default function Dashboard(props) {
       key: process.env.REACT_APP_GOOGLE_SHEETS_API_KEY,
       simpleSheet: false }
     ).then(function(data, tabletop) { 
-      console.log('Data succesfully fetched from Google Sheets!')
+      console.log('Data succesfully fetched from Google Sheets!');
+
       setPortfolioHistory(data.History.elements);
       setCompanies(data.Portfolio.elements);
+      setMarket(data.Market.elements);
+
       let ytd = data.History.elements[0];
       setYearToDatePerformance(ytd);
     })
@@ -196,20 +206,25 @@ export default function Dashboard(props) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Paper className={classes.market}>
+                <Market indexValues={market}/>
+              </Paper>
+            </Grid>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
                 <Chart portfolioHistory={portfolioHistory} />
               </Paper>
             </Grid>
-            {/* Recent Summary */}
+            {/* Summary */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Summary yearToDatePerformance={yearToDatePerformance} />
               </Paper>
             </Grid>
-            {/* Recent Orders */}
+            {/* Portfolio */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Portfolio companies={companies}/>

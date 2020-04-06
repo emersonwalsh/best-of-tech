@@ -9,7 +9,7 @@ function preventDefault(event) {
 }
 
 const useStyles = makeStyles({
-  neurtral: {
+  neutral: {
     flex: 1,
   },
   positive: {
@@ -62,7 +62,7 @@ export default function Summary(props) {
       <Typography component="p" variant="h5" className={daily.indexOf('-') > -1 ? classes.negative : classes.positive}>
         {daily}
       </Typography>
-      <Typography color="textSecondary" className={classes.neurtral}>
+      <Typography color="textSecondary" className={classes.neutral}>
         as of {today()}
       </Typography>
       {/* <div>
