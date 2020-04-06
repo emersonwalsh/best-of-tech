@@ -13,7 +13,7 @@ const formatData = (portfolioHistory) => {
   for (let i = portfolioHistory.length - 1; i >= 0 ; i--) {
     historicalData.push(createData(
       portfolioHistory[i].Date,
-      Number(portfolioHistory[i]['Percent Change'])
+      Number(portfolioHistory[i]['Total Percent Change'])
     ));
     
   }

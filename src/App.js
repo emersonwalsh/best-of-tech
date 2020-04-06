@@ -16,6 +16,7 @@ function App() {
     console.log('Sign out');
     localStorage.setItem('userAuth', false);
     setUserAuth(false);
+    // todo force rerender... why does setUserAuth sometimes not rerender?
   }
 
   if (localStorage.getItem('userAuth') === 'true') {

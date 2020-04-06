@@ -14,15 +14,15 @@ const useStyles = makeStyles({
   },
 });
 
-const formatYTD = (currentValue) => {
+const formatPercentage = (currentValue) => {
   if (!currentValue) {
     return '';
   }
-  let ytdValue = Number(currentValue['Percent Change']);
-  if (ytdValue > 0) {
-    return '+' + ytdValue.toFixed(2) + '%';
+  let formattedValue = Number(currentValue);
+  if (formattedValue > 0) {
+    return '+' + formattedValue.toFixed(2) + '%';
   }
-  return ytdValue.toFixed(2) + '%';
+  return formattedValue.toFixed(2) + '%';
 }
 
 export default function Summary(props) {
@@ -36,14 +36,18 @@ export default function Summary(props) {
     return mm + '/' + dd + '/' + yyyy;
   };
 
-  // format year to date function (+ or -)
-  const ytd = formatYTD(props.yearToDatePerformance);
+  const ytd = formatPercentage(props.yearToDatePerformance['Total Percent Change']);
+  const daily = formatPercentage(props.yearToDatePerformance['Daily Percent Change']);
 
   return (
     <React.Fragment>
       <Title>Year to Date</Title>
-      <Typography component="p" variant="h4" className={classes.depositContext}>
+      <Typography component="p" variant="h5" className={classes.depositContext}>
         {ytd}
+      </Typography>
+      <Title>Daily Change</Title>
+      <Typography component="p" variant="h5" className={classes.depositContext}>
+        {daily}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
         as of {today()}
