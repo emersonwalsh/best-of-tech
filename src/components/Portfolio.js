@@ -74,9 +74,10 @@ export default function Portfolio(props) {
       <Table size="small">
         <TableHead>
           <TableRow>
+          <TableCell align="left" padding="none"></TableCell>
             <TableCell align="left">Company</TableCell>
             <TableCell align="left">Ticker</TableCell>
-            <TableCell align="right">% Portfolio (Movement)</TableCell>
+            <TableCell align="right">% Portfolio</TableCell>
             <TableCell align="right">% Day</TableCell>
             <TableCell align="right">% Month</TableCell>
             <TableCell align="right">% Year</TableCell>
@@ -85,9 +86,10 @@ export default function Portfolio(props) {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
+              <TableCell align="left" padding="none">{row.id + 1}</TableCell>
               <TableCell align="left">{row.name}</TableCell>
               <TableCell align="left">{row.ticker}</TableCell>
-              <TableCell align="right">{row.portfolioPercentage + ' (' + row.movement + ')'}</TableCell>
+              <TableCell align="right">{row.portfolioPercentage}</TableCell>
               <TableCell align="right" className={row.dailyChange.indexOf('-') > -1 ? classes.negative : classes.positive}>{row.dailyChange}</TableCell>
               <TableCell align="right" className={row.monthlyChange.indexOf('-') > -1 ? classes.negative : classes.positive}>{row.monthlyChange}</TableCell>
               <TableCell align="right" className={row.yearlyChange.indexOf('-') > -1 ? classes.negative : classes.positive}>{row.yearlyChange}</TableCell>
