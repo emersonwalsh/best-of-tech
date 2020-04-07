@@ -3,8 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import SignInSide from './components/SignInSide';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 function App() {
+  // Override default primary color
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+          main: 'rgb(8,134,150)'
+        }
+      },
+      secondary: {
+        main: 'rgb(43,222,167)'
+      }
+    },
+  )
   const [userAuth, setUserAuth] = React.useState(false);
 
   const handleSignIn = (email, pass) => {
@@ -22,13 +35,17 @@ function App() {
   if (localStorage.getItem('userAuth') === 'true') {
     return (
       <div className="App">
-        <Dashboard onSignOut={handleSignOut} />
+          <MuiThemeProvider theme={theme}>
+            <Dashboard onSignOut={handleSignOut} />
+          </MuiThemeProvider>
       </div>
     );
   } else {
     return (
       <div className="App">
-        <SignInSide onSignIn={handleSignIn} />
+        <MuiThemeProvider theme={theme}>
+          <SignInSide onSignIn={handleSignIn} />
+        </MuiThemeProvider>
       </div>
     );
   }
