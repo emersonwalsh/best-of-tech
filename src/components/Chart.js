@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Label, Tooltip, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 
 // Generate Sales Data
@@ -54,6 +54,7 @@ export default function Chart(props) {
               % Change
             </Label>
           </YAxis>
+          <Tooltip />
           <Line type="monotone" dataKey="percentage" stroke={theme.palette.primary.main} dot={false} />
         </LineChart>
       </ResponsiveContainer>
