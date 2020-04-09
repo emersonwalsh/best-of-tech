@@ -37,7 +37,7 @@ export default function StockHistory(props) {
             left: 24,
           }}
         >
-          <XAxis dataKey="day" stroke={theme.palette.text.secondary} />
+          <XAxis dataKey="day" stroke={theme.palette.text.secondary} minTickGap={15} />
           <YAxis 
             stroke={theme.palette.text.secondary}
             // axisLine={false}

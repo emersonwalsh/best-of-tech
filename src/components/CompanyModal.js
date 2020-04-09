@@ -6,6 +6,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+
 import StockHistory from './StockHistory';
 
 const useStyles = makeStyles(theme => ({
@@ -41,12 +44,20 @@ export default function CompanyModal(props) {
             <Dialog open={props.open} onClose={handleCancel} fullWidth={true} maxWidth="md" aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{props.name}</DialogTitle>
                 <DialogContent>
-                    <div className={classes.chart}>
-                        <StockHistory data={props.chartData} />
-                    </div>
-                    <DialogContentText>
-                        {props.description}
-                    </DialogContentText>
+                <Container maxWidth="lg" className={classes.container}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            <div className={classes.chart}>
+                                <StockHistory data={props.chartData} />
+                            </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <DialogContentText>
+                                {props.description}
+                            </DialogContentText>
+                        </Grid>
+                    </Grid>
+                </Container>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCancel} color="primary">
