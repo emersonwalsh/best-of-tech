@@ -4,30 +4,29 @@ import { LineChart, Line, XAxis, YAxis, Label, Tooltip, ResponsiveContainer } fr
 import Title from './Title';
 
 // Generate Sales Data
-function createData(time, percentage) {
-  return { time, percentage };
+function createData(day, price) {
+  return { day, price };
 }
 
-const formatData = (portfolioHistory) => {
-  let historicalData = [];
-  for (let i = portfolioHistory.length - 1; i >= 0 ; i--) {
-    historicalData.push(createData(
-      portfolioHistory[i].Date,
-      Number(portfolioHistory[i]['Total Percent Change'])
-    ));
-    
-  }
-  return historicalData;
+const formatData = (data) => {
+    let historicalData = [];
+    for (let i = 1; i < data.length; i++) {
+        historicalData.push(createData(
+        data[i]['Daily Date'].split(' ')[0],
+        Number(data[i]['Daily Price'])
+        ));
+    }
+    return historicalData;
 }
 
-export default function Chart(props) {
+export default function StockHistory(props) {
   const theme = useTheme();
 
-  const data = formatData(props.portfolioHistory);
+  const data = formatData(props.data);
 
   return (
     <React.Fragment>
-      <Title>Value Over Time</Title>
+      {/* <Title>Value Over Time</Title> */}
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -38,7 +37,7 @@ export default function Chart(props) {
             left: 24,
           }}
         >
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+          <XAxis dataKey="day" stroke={theme.palette.text.secondary} />
           <YAxis 
             stroke={theme.palette.text.secondary}
             // axisLine={false}
@@ -50,11 +49,11 @@ export default function Chart(props) {
               position="left"
               style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
             >
-              % Change
+              Price ($)
             </Label>
           </YAxis>
           <Tooltip />
-          <Line type="monotone" dataKey="percentage" stroke={theme.palette.primary.main} dot={false} />
+          <Line type="monotone" dataKey="price" stroke={theme.palette.primary.main} dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </React.Fragment>

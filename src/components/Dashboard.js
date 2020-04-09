@@ -143,14 +143,12 @@ export default function Dashboard(props) {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
   useEffect(() => {
     Tabletop.init( {
       key: process.env.REACT_APP_GOOGLE_SHEETS_API_KEY,
       simpleSheet: false }
     ).then(function(data, tabletop) { 
       console.log('Data succesfully fetched from Google Sheets!');
-
       setPortfolioHistory(data.History.elements);
       setCompanies(data.Portfolio.elements);
       setMarket(data.Market.elements);

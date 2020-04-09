@@ -6,10 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import StockHistory from './StockHistory';
 
 const useStyles = makeStyles(theme => ({
     main: {
         display: 'contents'
+    },
+    chart: {
+        height: 260
     },
     formControlHalf: {
         margin: theme.spacing(1),
@@ -22,6 +26,7 @@ const useStyles = makeStyles(theme => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+
 }));
 
 export default function CompanyModal(props) {    
@@ -36,8 +41,11 @@ export default function CompanyModal(props) {
             <Dialog open={props.open} onClose={handleCancel} fullWidth={true} maxWidth="md" aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{props.name}</DialogTitle>
                 <DialogContent>
+                    <div className={classes.chart}>
+                        <StockHistory data={props.chartData} />
+                    </div>
                     <DialogContentText>
-                        Data for {props.ticker}
+                        {props.description}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
