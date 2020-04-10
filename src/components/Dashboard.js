@@ -172,7 +172,7 @@ export default function Dashboard(props) {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Best of Tech
+            Illustrative Best of Tech Portfolio
           </Typography>
           {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">

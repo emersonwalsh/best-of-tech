@@ -9,6 +9,9 @@ const useStyles = makeStyles({
     },
     negative: {
         color: 'red'
+    },
+    today: {
+        padding: '8px'
     }
 });
 
@@ -42,6 +45,11 @@ export default function Market(props) {
     <React.Fragment>
         <div style={{ width: '100%' }}>
             <Box display="flex">
+                <Box>
+                    <Typography component="h2" variant="h6" color="primary" className={classes.today}>
+                        Today:
+                    </Typography>
+                </Box>
                 {indecies.map((index) => (
                     <Box flexGrow={1} key={index.id}>
                         <Typography color="textSecondary">
