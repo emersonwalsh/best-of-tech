@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-// import Link from '@material-ui/core/Link';
+import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 // import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -34,7 +34,8 @@ function Copyright() {
         Best of Tech
       </Link>{' '} */}
       {new Date().getFullYear()}
-      {'.'}
+      {'. '}
+      Data provided by <Link href="https://support.google.com/docs/answer/3093281?hl=en" target="_blank"> Google's Finance API</Link>.
     </Typography>
   );
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import Tabletop from 'tabletop';
 
-// import Link from '@material-ui/core/Link';
+import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-// import TableSortLabel from '@material-ui/core/TableSortLabel';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
@@ -30,9 +30,6 @@ function calculateMovement(originalPosStr, currentPos) {
 }
 
 const formatRows = (companies) => {
-	// sort by portfolio %
-	companies.sort((a, b) => (a['Portfolio Percentage'] < b['Portfolio Percentage']) ? 1 : -1);
-
 	let updatedRows = [];
 	for (let i = 0; i < companies.length; i++) {
 		updatedRows.push(createRow(
@@ -52,34 +49,34 @@ const formatRows = (companies) => {
 }
 
 const formatPercentage = (value, decimalPlaces) => {
-	return Number(value).toFixed(2) + '%';
+	return Number(value).toFixed(2);
 };
 
-// function descendingComparator(a, b, orderBy) {
-// 	if (b[orderBy] < a[orderBy]) {
-// 		return -1;
-// 	}
-// 	if (b[orderBy] > a[orderBy]) {
-// 		return 1;
-// 	}
-// 	return 0;
-// }
+function descendingComparator(a, b, orderBy) {
+	if (Number(b[orderBy]) < Number(a[orderBy])) {
+		return -1;
+	}
+	if (Number(b[orderBy]) > Number(a[orderBy])) {
+		return 1;
+	}
+	return 0;
+}
 
-// function getComparator(order, orderBy) {
-// 	return order === 'desc'
-// 		? (a, b) => descendingComparator(a, b, orderBy)
-// 		: (a, b) => -descendingComparator(a, b, orderBy);
-// }
+function getComparator(order, orderBy) {
+	return order === 'desc'
+		? (a, b) => descendingComparator(a, b, orderBy)
+		: (a, b) => -descendingComparator(a, b, orderBy);
+}
 
-// function stableSort(array, comparator) {
-// 	const stabilizedThis = array.map((el, index) => [el, index]);
-// 	stabilizedThis.sort((a, b) => {
-// 		const order = comparator(a[0], b[0]);
-// 		if (order !== 0) return order;
-// 		return a[1] - b[1];
-// 	});
-// 	return stabilizedThis.map((el) => el[0]);
-// }
+function stableSort(array, comparator) {
+	const stabilizedThis = array.map((el, index) => [el, index]);
+	stabilizedThis.sort((a, b) => {
+		const order = comparator(a[0], b[0]);
+		if (order !== 0) return order;
+		return a[1] - b[1];
+	});
+	return stabilizedThis.map((el) => el[0]);
+}
 
 const useStyles = makeStyles((theme) => ({
 	seeMore: {
@@ -103,8 +100,75 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
+function EnhancedTableHead(props) {
+	const { order, orderBy, onRequestSort } = props;
+
+	const createSortHandler = (property) => (event) => {
+		onRequestSort(event, property);
+	};
+
+	return (
+		<TableHead>
+			<TableRow>
+				<TableCell align="left" padding="none"></TableCell>
+				<TableCell align="left">Company</TableCell>
+				<TableCell align="left">Ticker</TableCell>
+				<TableCell align="right"
+					key={'portfolioPercentage'}
+					sortDirection={orderBy === 'portfolioPercentage'? order : false}
+					>
+					<TableSortLabel
+						active={orderBy === 'portfolioPercentage'}
+						direction={orderBy === 'portfolioPercentage' ? order : 'asc'}
+						onClick={createSortHandler('portfolioPercentage')}
+					>
+						Portfolio (%)
+					</TableSortLabel>
+				</TableCell>
+				<TableCell align="right"
+					key={'dailyChange'}
+					sortDirection={orderBy === 'dailyChange'? order : false}
+					>
+					<TableSortLabel
+						active={orderBy === 'dailyChange'}
+						direction={orderBy === 'dailyChange' ? order : 'asc'}
+						onClick={createSortHandler('dailyChange')}
+					>
+						Day (%)
+					</TableSortLabel>
+				</TableCell>
+				<TableCell align="right"
+					key={'monthlyChange'}
+					sortDirection={orderBy === 'monthlyChange'? order : false}
+					>
+					<TableSortLabel
+						active={orderBy === 'monthlyChange'}
+						direction={orderBy === 'monthlyChange' ? order : 'asc'}
+						onClick={createSortHandler('monthlyChange')}
+					>
+						Month (%)
+					</TableSortLabel>
+				</TableCell>
+				<TableCell align="right"
+					key={'yearlyChange'}
+					sortDirection={orderBy === 'yearlyChange'? order : false}
+					>
+					<TableSortLabel
+						active={orderBy === 'yearlyChange'}
+						direction={orderBy === 'yearlyChange' ? order : 'asc'}
+						onClick={createSortHandler('yearlyChange')}
+					>
+						Year (%)
+					</TableSortLabel>
+				</TableCell>
+			</TableRow>
+		</TableHead>
+	);
+}
 
 export default function Portfolio(props) {
+	const [order, setOrder] = React.useState('desc');
+	const [orderBy, setOrderBy] = React.useState('portfolioPercentage');
 	const rows = formatRows(props.companies);
 	const classes = useStyles();
 
@@ -170,59 +234,23 @@ export default function Portfolio(props) {
 		});
 	};
 
-	// const createSortHandler = (property) => (event) => {
-	// 	onRequestSort(event, property);
-	// };
+	const handleRequestSort = (event, property) => {
+		const isAsc = orderBy === property && order === 'asc';
+		setOrder(isAsc ? 'desc' : 'asc');
+		setOrderBy(property);
+	};
 
 	return (
 		<React.Fragment>
 			<Title>Portfolio</Title>
 			<Table size="small">
-				<TableHead>
-					<TableRow>
-						<TableCell align="left" padding="none"></TableCell>
-						<TableCell align="left">Company</TableCell>
-						<TableCell align="left">Ticker</TableCell>
-						<TableCell align="right">
-							{/* <TableSortLabel
-								active={false}
-								direction={'asc'}
-								// onClick={createSortHandler('portfolio')}
-							> */}
-								Portfolio
-              				{/* </TableSortLabel> */}
-						</TableCell>
-						<TableCell align="right">
-							{/* <TableSortLabel
-								active={false}
-								direction={'asc'}
-							// onClick={createSortHandler(headCell.id)}
-							> */}
-								Day
-              				{/* </TableSortLabel> */}
-						</TableCell>
-						<TableCell align="right">
-							{/* <TableSortLabel
-								active={false}
-								direction={'asc'}
-							// onClick={createSortHandler(headCell.id)}
-							> */}
-								Month
-              				{/* </TableSortLabel> */}
-						</TableCell>
-						<TableCell align="right">
-							{/* <TableSortLabel
-								active={false}
-								direction={'asc'}
-							// onClick={createSortHandler(headCell.id)}
-							> */}
-								Year
-              				{/* </TableSortLabel> */}
-						</TableCell>
-					</TableRow>
-				</TableHead>
+				<EnhancedTableHead
+					order={order}
+					orderBy={orderBy}
+					onRequestSort={handleRequestSort}
+				/>
 				<TableBody>
-					{rows.map((row, idx) => (
+					{stableSort(rows, getComparator(order, orderBy)).map((row, idx) => (
 						<TableRow key={row.id} hover>
 							<TableCell align="left" className={classes.rowIndex} padding="none">{idx + 1}</TableCell>
 							<TableCell align="left">
@@ -245,9 +273,9 @@ export default function Portfolio(props) {
 				</TableBody>
 			</Table>
 			<div className={classes.seeMore}>
-				{/* <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link> */}
+				{/* <Typography variant="body2" color="textSecondary">
+					All data provided by <Link href="https://support.google.com/docs/answer/3093281?hl=en" target="_blank"> Google's Finance API </Link>
+				</Typography> */}
 			</div>
 			<CompanyModal
 				open={modalState.open}

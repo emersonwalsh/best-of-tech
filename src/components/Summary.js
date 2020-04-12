@@ -58,13 +58,9 @@ export default function Summary(props) {
 				{daily}
 			</Typography>
 			<Typography color="textSecondary" className={classes.neutral}>
+				{/* todo if today is after market close, replace with market close date */}
 				as of {today()}
 			</Typography>
-			{/* <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
-        </Link>
-      </div> */}
 		</React.Fragment>
 	);
 }
