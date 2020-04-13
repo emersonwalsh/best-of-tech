@@ -3,12 +3,13 @@ import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 
-// Generate Sales Data
+// Generate Chart Data
 function createData(time, portfolio, sp) {
 	return { 
 		time: time, 
-		portfolio: portfolio,
-		['S&P 500']: sp };
+		'BoT Portfolio': portfolio,
+		'S&P 500': sp 
+	};
 }
 
 const formatData = (portfolioHistory) => {
@@ -29,7 +30,6 @@ const formatData = (portfolioHistory) => {
 
 export default function Chart(props) {
 	const theme = useTheme();
-
 	const data = formatData(props.portfolioHistory);
 
 	return (
@@ -62,7 +62,7 @@ export default function Chart(props) {
 					</YAxis>
 					<Tooltip />
 					<Legend />
-					<Line type="monotone" dataKey="portfolio" stroke={theme.palette.primary.main} dot={false} />
+					<Line type="monotone" dataKey="BoT Portfolio" stroke={theme.palette.primary.main} dot={false} />
 					<Line type="monotone" dataKey="S&P 500" stroke="#2bdea7" dot={false} />
 
 				</LineChart>
