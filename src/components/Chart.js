@@ -5,10 +5,10 @@ import Title from './Title';
 
 // Generate Chart Data
 function createData(time, portfolio, sp) {
-	return { 
-		time: time, 
+	return {
+		time: time,
 		'BoT Portfolio': portfolio,
-		'S&P 500': sp 
+		'S&P 500': sp
 	};
 }
 
@@ -31,6 +31,53 @@ const formatData = (portfolioHistory) => {
 export default function Chart(props) {
 	const theme = useTheme();
 	const data = formatData(props.portfolioHistory);
+
+	const [opacity, setOpacity] = React.useState({
+		'BoT Portfolio': 1,
+		'S&P 500': 1
+	});
+
+	// const handleMouseEnter = (o) => {
+	// 	const { dataKey } = o;
+
+	// 	setOpacity({
+	// 		...opacity,
+	// 		[dataKey]: 0.5
+	// 	});
+	// };
+
+	// const handleMouseLeave = (o) => {
+	// 	const { dataKey } = o;
+
+	// 	if (opacity[dataKey] === 0) {
+	// 		return;
+	// 	}
+
+	// 	setOpacity({
+	// 		...opacity,
+	// 		[dataKey]: 1
+	// 	});
+	// };
+
+	const handleLegendClick = (o) => {
+		const { dataKey } = o;
+
+		let newOpacity = 1;
+
+		if (opacity[dataKey] > 0) {
+			newOpacity = 0;
+		}
+
+		setOpacity({
+			...opacity,
+			[dataKey]: newOpacity
+		});
+	}
+
+	const legendStyle = {
+		cursor: 'pointer',
+		userSelect: 'none'
+	};
 
 	return (
 		<React.Fragment>
@@ -61,10 +108,24 @@ export default function Chart(props) {
 						</Label>
 					</YAxis>
 					<Tooltip />
-					<Legend />
-					<Line type="monotone" dataKey="BoT Portfolio" stroke={theme.palette.primary.main} dot={false} />
-					<Line type="monotone" dataKey="S&P 500" stroke="#2bdea7" dot={false} />
+					<Legend onClick={handleLegendClick}
+						wrapperStyle={legendStyle}
+						// onMouseEnter={handleMouseEnter}
+						// onMouseLeave={handleMouseLeave}
+					/>
 
+					<Line type="monotone"
+						dataKey="BoT Portfolio"
+						stroke={theme.palette.primary.main}
+						dot={false}
+						strokeOpacity={opacity['BoT Portfolio']}
+					/>
+					<Line type="monotone"
+						dataKey="S&P 500"
+						stroke="#2bdea7"
+						dot={false}
+						strokeOpacity={opacity['S&P 500']}
+					/>
 				</LineChart>
 			</ResponsiveContainer>
 		</React.Fragment>
