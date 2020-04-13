@@ -1,20 +1,26 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Label, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 
 // Generate Sales Data
-function createData(time, percentage) {
-	return { time, percentage };
+function createData(time, portfolio, sp) {
+	return { 
+		time: time, 
+		portfolio: portfolio,
+		['S&P 500']: sp };
 }
 
 const formatData = (portfolioHistory) => {
 	let historicalData = [];
 	for (let i = portfolioHistory.length - 1; i >= 0; i--) {
-		let percentChangeStr = portfolioHistory[i]['Total Percent Change']
+		let portfolioPercentChangeStr = portfolioHistory[i]['Total Percent Change'];
+		let spPercentChangeStr = portfolioHistory[i]['S&P Total Percent Change'];
+
 		historicalData.push(createData(
 			portfolioHistory[i].Date,
-			Number(percentChangeStr.substring(0, percentChangeStr.length - 1))
+			Number(portfolioPercentChangeStr.substring(0, portfolioPercentChangeStr.length - 1)),
+			Number(spPercentChangeStr.substring(0, spPercentChangeStr.length - 1)),
 		));
 
 	}
@@ -55,7 +61,10 @@ export default function Chart(props) {
 						</Label>
 					</YAxis>
 					<Tooltip />
-					<Line type="monotone" dataKey="percentage" stroke={theme.palette.primary.main} dot={false} />
+					<Legend />
+					<Line type="monotone" dataKey="portfolio" stroke={theme.palette.primary.main} dot={false} />
+					<Line type="monotone" dataKey="S&P 500" stroke="#2bdea7" dot={false} />
+
 				</LineChart>
 			</ResponsiveContainer>
 		</React.Fragment>
