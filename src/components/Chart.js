@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Label, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 
 // Generate Chart Data
@@ -92,7 +92,10 @@ export default function Chart(props) {
 						left: 24,
 					}}
 				>
-					<XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+					<XAxis dataKey="time" 
+						stroke={theme.palette.text.secondary}
+						interval="preserveEnd"
+					/>
 					<YAxis
 						stroke={theme.palette.text.secondary}
 						// axisLine={false}
@@ -107,6 +110,7 @@ export default function Chart(props) {
 							% Change
 						</Label>
 					</YAxis>
+					<CartesianGrid strokeDasharray="3 3" />
 					<Tooltip />
 					<Legend onClick={handleLegendClick}
 						wrapperStyle={legendStyle}
@@ -114,16 +118,19 @@ export default function Chart(props) {
 						// onMouseLeave={handleMouseLeave}
 					/>
 
-					<Line type="monotone"
+					<Line type="linear"
 						dataKey="BoT Portfolio"
 						stroke={theme.palette.primary.main}
 						dot={false}
+						strokeWidth={2}
 						strokeOpacity={opacity['BoT Portfolio']}
 					/>
-					<Line type="monotone"
+					<Line type="linear"
+						// type="monotone"
 						dataKey="S&P 500"
 						stroke="#2bdea7"
 						dot={false}
+						strokeWidth={2}
 						strokeOpacity={opacity['S&P 500']}
 					/>
 				</LineChart>
