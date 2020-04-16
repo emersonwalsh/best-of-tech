@@ -4,11 +4,12 @@ import { LineChart, Line, XAxis, YAxis, Label, Tooltip, Legend, CartesianGrid, R
 import Title from './Title';
 
 // Generate Chart Data
-function createData(time, portfolio, sp) {
+function createData(time, portfolio, sp, nasdaq) {
 	return {
 		time: time,
 		'BoT Portfolio': portfolio,
-		'S&P 500': sp
+		'S&P 500': sp,
+		'Nasdaq Comp': nasdaq
 	};
 }
 
@@ -17,11 +18,13 @@ const formatData = (portfolioHistory) => {
 	for (let i = portfolioHistory.length - 1; i >= 0; i--) {
 		let portfolioPercentChangeStr = portfolioHistory[i]['Total Percent Change'];
 		let spPercentChangeStr = portfolioHistory[i]['S&P Total Percent Change'];
+		let nasdaqPercentChangeStr = portfolioHistory[i]['Nasdaq Composite Total Percent Change'];
 
 		historicalData.push(createData(
 			portfolioHistory[i].Date,
 			Number(portfolioPercentChangeStr.substring(0, portfolioPercentChangeStr.length - 1)),
 			Number(spPercentChangeStr.substring(0, spPercentChangeStr.length - 1)),
+			Number(nasdaqPercentChangeStr.substring(0, nasdaqPercentChangeStr.length - 1)),
 		));
 
 	}
@@ -34,7 +37,8 @@ export default function Chart(props) {
 
 	const [opacity, setOpacity] = React.useState({
 		'BoT Portfolio': 1,
-		'S&P 500': 1
+		'S&P 500': 1,
+		'Nasdaq Comp': 1,
 	});
 
 	// const handleMouseEnter = (o) => {
@@ -110,7 +114,9 @@ export default function Chart(props) {
 							% Change
 						</Label>
 					</YAxis>
-					<CartesianGrid strokeDasharray="3 3" />
+					<CartesianGrid strokeDasharray="3 3"
+						stroke="#ededed"
+					/>
 					<Tooltip />
 					<Legend onClick={handleLegendClick}
 						wrapperStyle={legendStyle}
@@ -130,8 +136,18 @@ export default function Chart(props) {
 						dataKey="S&P 500"
 						stroke="#2bdea7"
 						dot={false}
-						strokeWidth={2}
+						strokeWidth={1}
+						strokeDasharray="5 5"
 						strokeOpacity={opacity['S&P 500']}
+					/>
+					<Line type="linear"
+						// type="monotone"
+						dataKey="Nasdaq Comp"
+						stroke="#0eab7b"
+						dot={false}
+						strokeWidth={1}
+						strokeDasharray="5 5"
+						strokeOpacity={opacity['Nasdaq Comp']}
 					/>
 				</LineChart>
 			</ResponsiveContainer>

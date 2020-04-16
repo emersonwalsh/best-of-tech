@@ -1,7 +1,6 @@
 import React from 'react';
 import Tabletop from 'tabletop';
 
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 import CompanyModal from './CompanyModal'
 
-function createRow(id, name, ticker, movement, portfolioPercentage, dailyChange, monthlyChange, yearlyChange, description) {
-	return { id, name, ticker, movement, portfolioPercentage, dailyChange, monthlyChange, yearlyChange, description };
+function createRow(id, name, ticker, movement, portfolioPercentage, dailyChange, monthlyChange, yearlyChange, description, hedgeFunds) {
+	return { id, name, ticker, movement, portfolioPercentage, dailyChange, monthlyChange, yearlyChange, description, hedgeFunds };
 }
 
 function calculateMovement(originalPosStr, currentPos) {
@@ -41,7 +40,8 @@ const formatRows = (companies) => {
 			formatPercentage(companies[i]['Daily Percentage Change'], 2),
 			formatPercentage(companies[i]['Monthly Percentage Change'], 2),
 			formatPercentage(companies[i]['Yearly Percentage Change'], 2),
-			companies[i].Description
+			companies[i].Description,
+			companies[i]['Hedge Funds']
 		));
 
 	}
@@ -177,7 +177,8 @@ export default function Portfolio(props) {
 		ticker: '',
 		name: '',
 		data: [],
-		description: ''
+		description: '',
+		hedgeFunds: '',
 	});
 
 	const companyGoogleSheetsMapping = {
@@ -209,6 +210,7 @@ export default function Portfolio(props) {
 		let ticker = event.target.id;
 		let name = event.target.textContent || '';
 		let description = event.target.attributes.companydescription.value || '';
+		let hedgeFunds = event.target.attributes.hedgefunds.value || '';
 
 		Tabletop.init({
 			key: companyGoogleSheetsMapping[ticker],
@@ -219,7 +221,8 @@ export default function Portfolio(props) {
 				ticker: ticker,
 				name: name,
 				data: data,
-				description: description
+				description: description,
+				hedgeFunds: hedgeFunds,
 			});
 		})
 	}
@@ -230,7 +233,8 @@ export default function Portfolio(props) {
 			ticker: '',
 			name: '',
 			data: [],
-			description: ''
+			description: '',
+			hedgeFunds: ''
 		});
 	};
 
@@ -258,6 +262,7 @@ export default function Portfolio(props) {
 									color="primary"
 									id={row.ticker}
 									companydescription={row.description}
+									hedgefunds={row.hedgeFunds}
 									className={classes.name}
 									onClick={openStockChartForName}>
 									{row.name}
@@ -282,8 +287,10 @@ export default function Portfolio(props) {
 				ticker={modalState.ticker}
 				name={modalState.name}
 				description={modalState.description}
+				hedgeFunds={modalState.hedgeFunds}
 				chartData={modalState.data}
-				onClose={handleModalClose} />
+				onClose={handleModalClose} 
+			/>
 		</React.Fragment>
 	);
 }

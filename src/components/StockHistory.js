@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
-import Title from './Title';
 
 // Generate Historical Data
 function createData(day, Price) {
@@ -26,7 +25,6 @@ export default function StockHistory(props) {
 
 	return (
 		<React.Fragment>
-			{/* <Title>Value Over Time</Title> */}
 			<ResponsiveContainer>
 				<LineChart
 					data={data}
@@ -52,7 +50,9 @@ export default function StockHistory(props) {
 							Price ($)
             			</Label>
 					</YAxis>
-					<CartesianGrid strokeDasharray="3 3" />
+					<CartesianGrid strokeDasharray="3 3" 
+						stroke="#ededed"
+					/>
 					<Tooltip />
 					<Line type="linear" dataKey="Price" stroke={theme.palette.primary.main} dot={false} />
 				</LineChart>

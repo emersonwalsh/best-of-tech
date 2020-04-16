@@ -53,7 +53,7 @@ export default function CompanyModal(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <DialogContentText>
-                                <b>Hedge Funds:</b> [insert list here]
+                                <b>Hedge Funds:</b> {props.hedgeFunds}
                             </DialogContentText>
                         </Grid>
                         <Grid item xs={12}>
