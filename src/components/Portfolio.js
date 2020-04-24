@@ -134,7 +134,7 @@ function EnhancedTableHead(props) {
 						direction={orderBy === 'dailyChange' ? order : 'asc'}
 						onClick={createSortHandler('dailyChange')}
 					>
-						Day (%)
+						Today (%)
 					</TableSortLabel>
 				</TableCell>
 				<TableCell align="right"
@@ -146,7 +146,7 @@ function EnhancedTableHead(props) {
 						direction={orderBy === 'monthlyChange' ? order : 'asc'}
 						onClick={createSortHandler('monthlyChange')}
 					>
-						Month (%)
+						1 Month (%)
 					</TableSortLabel>
 				</TableCell>
 				<TableCell align="right"
@@ -158,7 +158,7 @@ function EnhancedTableHead(props) {
 						direction={orderBy === 'yearlyChange' ? order : 'asc'}
 						onClick={createSortHandler('yearlyChange')}
 					>
-						Year (%)
+						1 Year (%)
 					</TableSortLabel>
 				</TableCell>
 			</TableRow>
