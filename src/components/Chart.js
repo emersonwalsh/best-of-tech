@@ -138,7 +138,10 @@ export default function Chart(props) {
 				>
 					<XAxis dataKey="time" 
 						stroke={theme.palette.text.secondary}
-						interval="preserveEnd"
+						interval={3}
+						type="category"
+						// interval="preserveEnd"
+						// tickCount={2}
 					/>
 					<YAxis
 						stroke={theme.palette.text.secondary}
