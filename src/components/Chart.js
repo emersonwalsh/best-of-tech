@@ -1,13 +1,14 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from 'recharts';
 import Title from './Title';
+
 
 // Generate Chart Data
 function createData(time, portfolio, sp, nasdaq) {
 	return {
 		time: time,
-		'BoT Portfolio': portfolio,
+		'BoT': portfolio,
 		'S&P 500': sp,
 		'Nasdaq Comp': nasdaq
 	};
@@ -31,12 +32,51 @@ const formatData = (portfolioHistory) => {
 	return historicalData;
 }
 
+const useStyles = makeStyles((theme) => ({
+	tooltipContainer: {
+		fontSize: '0.875rem',
+		textAlign: 'left',
+		maxWidth: '200px',
+		backgroundColor: '#FFFFFF',
+		borderRadius: '4px',
+		padding: '12px',
+		boxShadow: '0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
+		opacity: '0.98'
+	},
+	tooltipLabel: {
+		fontWeight: 'bold'
+	},
+	tooltipDatapoint: {
+		padding: '4px 0 0 8px'
+	},
+    positive: {
+        color: 'green'
+    },
+}));
+
+const CustomTooltip = ({ active, payload, label }) => {
+	const classes = useStyles();
+
+	if (active) {
+		return (
+			<div className={classes.tooltipContainer}>
+				<div className={classes.tooltipLabel}>{label}</div>
+				{payload.map((index) => (
+					<div style={{color: index.stroke}} className={classes.tooltipDatapoint}>{`${index.name} : ${index.value}%`}</div>
+				))}
+			</div>
+		);
+	}
+  
+	return null;
+};
+
 export default function Chart(props) {
 	const theme = useTheme();
 	const data = formatData(props.portfolioHistory);
 
 	const [opacity, setOpacity] = React.useState({
-		'BoT Portfolio': 1,
+		'BoT': 1,
 		'S&P 500': 1,
 		'Nasdaq Comp': 1,
 	});
@@ -114,10 +154,11 @@ export default function Chart(props) {
 							% Change
 						</Label>
 					</YAxis>
-					<CartesianGrid strokeDasharray="3 3"
+					{/* <CartesianGrid strokeDasharray="3 3"
 						stroke="#ededed"
-					/>
-					<Tooltip />
+					/> */}
+					<CartesianGrid vertical={false} strokeDashArray="3 3" stroke="#ededed"/>
+					<Tooltip content={<CustomTooltip />}/>
 					<Legend onClick={handleLegendClick}
 						wrapperStyle={legendStyle}
 						// onMouseEnter={handleMouseEnter}
@@ -125,11 +166,11 @@ export default function Chart(props) {
 					/>
 
 					<Line type="linear"
-						dataKey="BoT Portfolio"
+						dataKey="BoT"
 						stroke={theme.palette.primary.main}
 						dot={false}
 						strokeWidth={2}
-						strokeOpacity={opacity['BoT Portfolio']}
+						strokeOpacity={opacity['BoT']}
 					/>
 					<Line type="linear"
 						// type="monotone"

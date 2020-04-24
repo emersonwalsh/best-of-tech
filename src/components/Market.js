@@ -45,14 +45,14 @@ export default function Market(props) {
     <React.Fragment>
         <div style={{ width: '100%' }}>
             <Box display="flex">
-                <Box>
+                {/* <Box>
                     <Typography component="h2" variant="h6" color="primary" className={classes.today}>
                         Today:
                     </Typography>
-                </Box>
+                </Box> */}
                 {indecies.map((index) => (
                     <Box flexGrow={1} key={index.id}>
-                        <Typography color="textSecondary">
+                        <Typography color="primary" >
                             {index.name}
                         </Typography>
                         <Typography className={index.value.indexOf('-') > -1 ? classes.negative : classes.positive}>
