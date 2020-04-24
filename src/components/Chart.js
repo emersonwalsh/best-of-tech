@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 
@@ -31,45 +31,6 @@ const formatData = (portfolioHistory) => {
 	}
 	return historicalData;
 }
-
-const useStyles = makeStyles((theme) => ({
-	tooltipContainer: {
-		fontSize: '0.875rem',
-		textAlign: 'left',
-		maxWidth: '200px',
-		backgroundColor: '#FFFFFF',
-		borderRadius: '4px',
-		padding: '12px',
-		boxShadow: '0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
-		opacity: '0.98'
-	},
-	tooltipLabel: {
-		fontWeight: 'bold'
-	},
-	tooltipDatapoint: {
-		padding: '4px 0 0 8px'
-	},
-    positive: {
-        color: 'green'
-    },
-}));
-
-const CustomTooltip = ({ active, payload, label }) => {
-	const classes = useStyles();
-
-	if (active) {
-		return (
-			<div className={classes.tooltipContainer}>
-				<div className={classes.tooltipLabel}>{label}</div>
-				{payload.map((index) => (
-					<div style={{color: index.stroke}} className={classes.tooltipDatapoint}>{`${index.name} : ${index.value}%`}</div>
-				))}
-			</div>
-		);
-	}
-  
-	return null;
-};
 
 export default function Chart(props) {
 	const theme = useTheme();
@@ -123,6 +84,25 @@ export default function Chart(props) {
 		userSelect: 'none'
 	};
 
+	const tooltipContainerStyle = {
+		fontSize: '0.875rem',
+		textAlign: 'left',
+		maxWidth: '200px',
+		backgroundColor: '#FFFFFF',
+		borderRadius: '4px',
+		padding: '12px',
+		boxShadow: '0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
+		opacity: '0.98'
+	};
+
+	const tooltipLabelStyle = {
+		fontWeight: 'bold'
+	};
+
+	const tooltipDatapointStyle = {
+		padding: '4px 0 0 8px'
+	};
+
 	return (
 		<React.Fragment>
 			<Title>Value Over Time</Title>
@@ -161,13 +141,15 @@ export default function Chart(props) {
 						stroke="#ededed"
 					/> */}
 					<CartesianGrid vertical={false} strokeDashArray="3 3" stroke="#ededed"/>
-					<Tooltip content={<CustomTooltip />}/>
+					<Tooltip contentStyle={tooltipContainerStyle}
+						itemStyle={tooltipDatapointStyle}
+						labelStyle={tooltipLabelStyle}
+					/>
 					<Legend onClick={handleLegendClick}
 						wrapperStyle={legendStyle}
 						// onMouseEnter={handleMouseEnter}
 						// onMouseLeave={handleMouseLeave}
 					/>
-
 					<Line type="linear"
 						dataKey="BoT"
 						stroke={theme.palette.primary.main}
