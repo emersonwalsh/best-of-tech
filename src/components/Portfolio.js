@@ -12,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 import CompanyModal from './CompanyModal'
 
-function createRow(id, name, ticker, movement, portfolioPercentage, dailyChange, monthlyChange, yearlyChange, description, hedgeFunds) {
-	return { id, name, ticker, movement, portfolioPercentage, dailyChange, monthlyChange, yearlyChange, description, hedgeFunds };
+function createRow(id, name, ticker, movement, currentPrice, dailyChange, monthlyChange, yearlyChange, description, hedgeFunds) {
+	return { id, name, ticker, movement, currentPrice, dailyChange, monthlyChange, yearlyChange, description, hedgeFunds };
 }
 
 function calculateMovement(originalPosStr, currentPos) {
@@ -36,7 +36,8 @@ const formatRows = (companies) => {
 			companies[i].Name,
 			companies[i].Ticker,
 			calculateMovement(companies[i]['#'], i + 1),
-			formatPercentage(companies[i]['Portfolio Percentage'], 2),
+			formatPrice(companies[i]['Current Price ($)']),
+			// formatPercentage(companies[i]['Portfolio Percentage'], 2),
 			formatPercentage(companies[i]['Daily Percentage Change'], 2),
 			formatPercentage(companies[i]['Monthly Percentage Change'], 2),
 			formatPercentage(companies[i]['Yearly Percentage Change'], 2),
@@ -50,6 +51,13 @@ const formatRows = (companies) => {
 
 const formatPercentage = (value, decimalPlaces) => {
 	return Number(value).toFixed(2);
+};
+
+const formatPrice = (value) => {
+	return Number(value).toLocaleString('en', { 
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2 
+	});
 };
 
 function descendingComparator(a, b, orderBy) {
@@ -113,18 +121,7 @@ function EnhancedTableHead(props) {
 				<TableCell align="left" padding="none"></TableCell>
 				<TableCell align="left">Company</TableCell>
 				<TableCell align="left">Ticker</TableCell>
-				<TableCell align="right"
-					key={'portfolioPercentage'}
-					sortDirection={orderBy === 'portfolioPercentage'? order : false}
-					>
-					<TableSortLabel
-						active={orderBy === 'portfolioPercentage'}
-						direction={orderBy === 'portfolioPercentage' ? order : 'asc'}
-						onClick={createSortHandler('portfolioPercentage')}
-					>
-						Portfolio (%)
-					</TableSortLabel>
-				</TableCell>
+				<TableCell align="right">Current Price ($)</TableCell>
 				<TableCell align="right"
 					key={'dailyChange'}
 					sortDirection={orderBy === 'dailyChange'? order : false}
@@ -168,7 +165,7 @@ function EnhancedTableHead(props) {
 
 export default function Portfolio(props) {
 	const [order, setOrder] = React.useState('desc');
-	const [orderBy, setOrderBy] = React.useState('portfolioPercentage');
+	const [orderBy, setOrderBy] = React.useState('dailyChange');
 	const rows = formatRows(props.companies);
 	const classes = useStyles();
 
@@ -269,7 +266,7 @@ export default function Portfolio(props) {
 								</Typography>
 							</TableCell>
 							<TableCell align="left">{row.ticker}</TableCell>
-							<TableCell align="right">{row.portfolioPercentage}</TableCell>
+							<TableCell align="right">{row.currentPrice}</TableCell>
 							<TableCell align="right" className={row.dailyChange.indexOf('-') > -1 ? classes.negative : classes.positive}>{row.dailyChange}</TableCell>
 							<TableCell align="right" className={row.monthlyChange.indexOf('-') > -1 ? classes.negative : classes.positive}>{row.monthlyChange}</TableCell>
 							<TableCell align="right" className={row.yearlyChange.indexOf('-') > -1 ? classes.negative : classes.positive}>{row.yearlyChange}</TableCell>
