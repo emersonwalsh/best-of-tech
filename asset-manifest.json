@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/best-of-tech/static/css/main.4e3bbd05.chunk.css",
-    "main.js": "/best-of-tech/static/js/main.3b408057.chunk.js",
-    "main.js.map": "/best-of-tech/static/js/main.3b408057.chunk.js.map",
+    "main.js": "/best-of-tech/static/js/main.cff174f2.chunk.js",
+    "main.js.map": "/best-of-tech/static/js/main.cff174f2.chunk.js.map",
     "runtime-main.js": "/best-of-tech/static/js/runtime-main.1d903c57.js",
     "runtime-main.js.map": "/best-of-tech/static/js/runtime-main.1d903c57.js.map",
     "static/js/2.b3bf1dc8.chunk.js": "/best-of-tech/static/js/2.b3bf1dc8.chunk.js",
     "static/js/2.b3bf1dc8.chunk.js.map": "/best-of-tech/static/js/2.b3bf1dc8.chunk.js.map",
     "index.html": "/best-of-tech/index.html",
-    "precache-manifest.5a0779559e7c691ebf57f9fe90fe3dcc.js": "/best-of-tech/precache-manifest.5a0779559e7c691ebf57f9fe90fe3dcc.js",
+    "precache-manifest.4a31bd88627a1327d255257cc1fc117b.js": "/best-of-tech/precache-manifest.4a31bd88627a1327d255257cc1fc117b.js",
     "service-worker.js": "/best-of-tech/service-worker.js",
     "static/css/main.4e3bbd05.chunk.css.map": "/best-of-tech/static/css/main.4e3bbd05.chunk.css.map",
     "static/js/2.b3bf1dc8.chunk.js.LICENSE.txt": "/best-of-tech/static/js/2.b3bf1dc8.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.1d903c57.js",
     "static/js/2.b3bf1dc8.chunk.js",
     "static/css/main.4e3bbd05.chunk.css",
-    "static/js/main.3b408057.chunk.js"
+    "static/js/main.cff174f2.chunk.js"
   ]
 }
