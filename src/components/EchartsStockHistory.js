@@ -75,7 +75,7 @@ export default function EchartsStockHistory(props) {
                         data: price,
                         type: 'line',
                         showSymbol: false,
-                        smooth: true
+                        smooth: false
                     }
                 ]
             }}

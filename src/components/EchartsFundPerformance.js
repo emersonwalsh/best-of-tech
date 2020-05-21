@@ -102,7 +102,7 @@ export default function EchartsFundPerformance(props) {
                         lineStyle: {
                             width: 3
                         },
-                        smooth: true
+                        smooth: false
                     },
                     { 
                         name: 'S&P 500',
@@ -110,14 +110,14 @@ export default function EchartsFundPerformance(props) {
                         type: 'line',
                         showSymbol: false,
                         itemStyle: {
-                            color: '#de492b',
+                            color: '#2b2929',
                         },
                         lineStyle: {
-                            color: '#de492b',
+                            color: '#2b2929',
                             opacity: 0.7,
                             width: 1
                         },
-                        smooth: true
+                        smooth: false
                     },
                     { 
                         name: 'NASDAQ Comp',
@@ -125,14 +125,14 @@ export default function EchartsFundPerformance(props) {
                         type: 'line',
                         showSymbol: false,
                         itemStyle: {
-                            color: '#7e6de0',
+                            color: '#919191',
                         },
                         lineStyle: {
-                            color: '#7e6de0',
+                            color: '#919191',
                             opacity: 0.7,
                             width: 1
                         },
-                        smooth: true
+                        smooth: false
                     }
                 ]
             }}
