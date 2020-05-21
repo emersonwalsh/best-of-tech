@@ -14,144 +14,144 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © Best of Tech '}
-      {/* <Link color="inherit" href="https://material-ui.com/">
-        Best of Tech
-      </Link>{' '} */}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+	return (
+		<Typography variant="body2" color="textSecondary" align="center">
+			{'Copyright © BoT '}
+			{/* <Link color="inherit" href="https://material-ui.com/">
+				Best of Tech
+			</Link>{' '} */}
+			{new Date().getFullYear()}
+			{'.'}
+		</Typography>
+	);
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '100vh',
-  },
-  image: {
-    // backgroundImage: 'url(https://source.unsplash.com/VP4WmibxvcY)',
-    // backgroundImage: 'url(https://source.unsplash.com/ZzOa5G8hSPI)',
-    backgroundImage: 'url(https://source.unsplash.com/bU6JyhSI6zo)',
+	root: {
+		height: '100vh',
+	},
+	image: {
+		// backgroundImage: 'url(https://source.unsplash.com/VP4WmibxvcY)',
+		// backgroundImage: 'url(https://source.unsplash.com/ZzOa5G8hSPI)',
+		backgroundImage: 'url(https://source.unsplash.com/bU6JyhSI6zo)',
 
-    backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+		backgroundRepeat: 'no-repeat',
+		backgroundColor:
+			theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+	},
+	paper: {
+		margin: theme.spacing(8, 4),
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
+	avatar: {
+		margin: theme.spacing(1),
+		backgroundColor: theme.palette.secondary.main,
+	},
+	form: {
+		width: '100%', // Fix IE 11 issue.
+		marginTop: theme.spacing(1),
+	},
+	submit: {
+		margin: theme.spacing(3, 0, 2),
+	},
 }));
 
 export default function SignInSide(props) {
-  const classes = useStyles();
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+	const classes = useStyles();
+	const [email, setEmail] = React.useState('');
+	const [password, setPassword] = React.useState('');
 
-  const handleSignIn = () => {
-    if (email === process.env.REACT_APP_USERNAME && password === process.env.REACT_APP_PASSWORD) {
-      console.log('Successful Login');
-      props.onSignIn();
-    } else {
-      console.error('Failed Login');
-    }
-  }
+	const handleSignIn = () => {
+		if (email === process.env.REACT_APP_USERNAME && password === process.env.REACT_APP_PASSWORD) {
+			console.log('Successful Login');
+			props.onSignIn();
+		} else {
+			console.error('Failed Login');
+		}
+	}
 
-  const handleEmailChange = event => {
-      setEmail(event.target.value)
-  };
-  const handlePasswordChange = event => {
-      setPassword(event.target.value)
-  };
+	const handleEmailChange = event => {
+		setEmail(event.target.value)
+	};
+	const handlePasswordChange = event => {
+		setPassword(event.target.value)
+	};
 
-  return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
-            <Button
-              // type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={handleSignIn}
-            >
-              Sign In
-            </Button>
-            {/* <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> */}
-            <Box mt={5}>
-              <Copyright />
-            </Box>
-          </form>
-        </div>
-      </Grid>
-    </Grid>
-  );
+	return (
+		<Grid container component="main" className={classes.root}>
+			<CssBaseline />
+			<Grid item xs={false} sm={4} md={7} className={classes.image} />
+			<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+				<div className={classes.paper}>
+					<Avatar className={classes.avatar}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component="h1" variant="h5">
+						Sign in
+          			</Typography>
+					<form className={classes.form} noValidate>
+						<TextField
+							variant="outlined"
+							margin="normal"
+							required
+							fullWidth
+							id="email"
+							label="Email Address"
+							name="email"
+							autoComplete="email"
+							autoFocus
+							value={email}
+							onChange={handleEmailChange}
+						/>
+						<TextField
+							variant="outlined"
+							margin="normal"
+							required
+							fullWidth
+							name="password"
+							label="Password"
+							type="password"
+							id="password"
+							autoComplete="current-password"
+							value={password}
+							onChange={handlePasswordChange}
+						/>
+						{/* <FormControlLabel
+						control={<Checkbox value="remember" color="primary" />}
+						label="Remember me"
+						/> */}
+						<Button
+							// type="submit"
+							fullWidth
+							variant="contained"
+							color="primary"
+							className={classes.submit}
+							onClick={handleSignIn}
+						>
+							Sign In
+            			</Button>
+						{/* <Grid container>
+						<Grid item xs>
+							<Link href="#" variant="body2">
+							Forgot password?
+							</Link>
+						</Grid>
+						<Grid item>
+							<Link href="#" variant="body2">
+							{"Don't have an account? Sign Up"}
+							</Link>
+						</Grid>
+						</Grid> */}
+						<Box mt={5}>
+							<Copyright />
+						</Box>
+					</form>
+				</div>
+			</Grid>
+		</Grid>
+	);
 }

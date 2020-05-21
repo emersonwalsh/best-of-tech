@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
-import StockHistory from './StockHistory';
+import EchartsStockHistory from './EchartsStockHistory';
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -48,7 +48,7 @@ export default function CompanyModal(props) {
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <div className={classes.chart}>
-                                <StockHistory data={props.chartData} />
+                                <EchartsStockHistory data={props.chartData} name={props.name} />
                             </div>
                         </Grid>
                         <Grid item xs={12}>

@@ -22,14 +22,16 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 // import NotificationsIcon from '@material-ui/icons/Notifications';
 import MainListItems from './listItems';
 import Market from './Market';
-import Chart from './Chart';
+import EchartsFundPerformance from './EchartsFundPerformance';
+
+
 import Summary from './Summary';
 import Portfolio from './Portfolio';
 
 function Copyright() {
 	return (
 		<Typography variant="body2" color="textSecondary" align="center">
-			{'Copyright © Best of Tech '}
+			{'Copyright © BoT '}
 			{/* <Link color="inherit" href="https://material-ui.com/">
 				Best of Tech
 			</Link>{' '} */}
@@ -176,7 +178,7 @@ export default function Dashboard(props) {
 						<MenuIcon />
 					</IconButton>
 					<Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-						Illustrative Best of Tech Portfolio
+						BoT
           			</Typography>
 					{/* <IconButton color="inherit">
 						<Badge badgeContent={4} color="secondary">
@@ -217,7 +219,7 @@ export default function Dashboard(props) {
 						{/* Chart */}
 						<Grid item xs={12} md={8} lg={9}>
 							<Paper className={fixedHeightPaper}>
-								<Chart portfolioHistory={portfolioHistory} />
+								<EchartsFundPerformance portfolioHistory={portfolioHistory} />
 							</Paper>
 						</Grid>
 						{/* Summary */}
