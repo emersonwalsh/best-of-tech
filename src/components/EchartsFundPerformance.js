@@ -6,7 +6,7 @@ import 'echarts/lib/component/legend';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/grid';
 // todo add mark line representing Q1
-// import 'echarts/lib/component/markLine';
+import 'echarts/lib/component/markLine';
 
 // Generate Chart Data
 function createData(time, portfolio, sp, nasdaq) {
@@ -102,7 +102,23 @@ export default function EchartsFundPerformance(props) {
                         lineStyle: {
                             width: 3
                         },
-                        smooth: false
+                        smooth: false,
+                        markLine: {
+                            symbol: ['none', 'none'],
+                            label: {
+                                show: false,
+                                formatter: '{b}',
+                                emphasis: {
+                                    show: true
+                                }
+                            },
+                            data: [
+                                {
+                                    xAxis: '5/15/2020',
+                                    name: '2020 Q1'
+                                }
+                            ]
+                        },
                     },
                     { 
                         name: 'S&P 500',
