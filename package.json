@@ -13,7 +13,7 @@
     "echarts-for-react": "^2.0.16",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "tabletop": "^1.6.2"
   },
   "scripts": {
